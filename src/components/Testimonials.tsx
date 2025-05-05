@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import ReviewForm from './ReviewForm';
 
 const TestimonialCard = ({ 
   quote, 
@@ -86,6 +87,10 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <TestimonialCard key={index} {...testimonial} />
           ))}
+        </div>
+        
+        <div className="mt-16 max-w-2xl mx-auto">
+          <ReviewForm />
         </div>
       </div>
     </section>
