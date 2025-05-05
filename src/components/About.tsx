@@ -1,6 +1,8 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Trophy } from 'lucide-react';
 
 const About = () => {
   return (
@@ -8,16 +10,7 @@ const About = () => {
       <div className="container">
         <h2 className="section-title">About Your Pilot</h2>
         
-        <div className="grid md:grid-cols-2 gap-12 items-center mt-16">
-          {/* Pilot Image */}
-          <div className="rounded-lg overflow-hidden shadow-lg transform hover:scale-[1.02] transition duration-300">
-            <img 
-              src="https://images.unsplash.com/photo-1617720087359-3414528de950?q=80&w=987&auto=format&fit=crop" 
-              alt="Moataz Rachad" 
-              className="w-full h-auto object-cover" 
-            />
-          </div>
-          
+        <div className="grid md:grid-cols-2 gap-12 items-start mt-16">
           {/* Pilot Info */}
           <div className="space-y-6">
             <h3 className="text-3xl font-semibold text-gray-800">Moataz Rachad</h3>
@@ -32,15 +25,19 @@ const About = () => {
               </div>
               <div className="flex items-center">
                 <span className="font-semibold text-sky-700 w-32">Certifications:</span>
-                <span>BI, BP, BPC</span>
+                <span>BI (2016), BP (2017), BPC (2023)</span>
               </div>
               <div className="flex items-center">
                 <span className="font-semibold text-sky-700 w-32">Club Number:</span>
                 <span>MR 3857</span>
               </div>
               <div className="flex items-center">
+                <span className="font-semibold text-sky-700 w-32">Insurance ID:</span>
+                <span>050224000018</span>
+              </div>
+              <div className="flex items-center">
                 <span className="font-semibold text-sky-700 w-32">Federation:</span>
-                <span>Moroccan Federation of Air Sports</span>
+                <span>Moroccan Royal Federation of Light and Sport Aviation</span>
               </div>
             </div>
             
@@ -52,7 +49,8 @@ const About = () => {
               <h4 className="text-xl font-semibold text-gray-800 mb-3">Awards & Achievements</h4>
               <div className="flex flex-wrap gap-3">
                 <Card className="bg-sky-50 border-sky-200">
-                  <CardContent className="p-4">
+                  <CardContent className="p-4 flex items-center gap-2">
+                    <Trophy className="text-sky-700" />
                     <p className="font-medium">Coupe du Trône 2023</p>
                   </CardContent>
                 </Card>
@@ -68,6 +66,48 @@ const About = () => {
                 </Card>
               </div>
             </div>
+          </div>
+          
+          {/* Credentials & Awards */}
+          <div className="space-y-8">
+            <Tabs defaultValue="license" className="w-full">
+              <TabsList className="w-full grid grid-cols-2">
+                <TabsTrigger value="license">Official License</TabsTrigger>
+                <TabsTrigger value="awards">Awards</TabsTrigger>
+              </TabsList>
+              <TabsContent value="license" className="mt-6">
+                <div className="rounded-lg overflow-hidden shadow-lg">
+                  <img 
+                    src="/public/lovable-uploads/decba7f7-2490-4988-9542-758fd3d11ea9.png" 
+                    alt="Moataz Rachad's Official Pilot License" 
+                    className="w-full h-auto" 
+                  />
+                </div>
+                <div className="mt-4 bg-sky-50 p-4 rounded-lg">
+                  <h5 className="font-semibold text-sky-800 mb-2">License Details</h5>
+                  <ul className="space-y-1 text-sm">
+                    <li><span className="font-medium">BI:</span> Brevet Initial / Beginner Certificate (obtained 27.11.2016)</li>
+                    <li><span className="font-medium">BP:</span> Brevet Pilote / Pilot Certificate (obtained 20.02.2017)</li>
+                    <li><span className="font-medium">BPC:</span> Brevet Pilote Confirmé / Confirmed Pilot Certificate (obtained 25.11.2023)</li>
+                  </ul>
+                </div>
+              </TabsContent>
+              <TabsContent value="awards" className="mt-6">
+                <div className="rounded-lg overflow-hidden shadow-lg">
+                  <img 
+                    src="/public/lovable-uploads/9534ede3-ed8c-479b-b177-38e3aad35f14.png" 
+                    alt="Moataz Rachad with Coupe du Trône Trophy" 
+                    className="w-full h-auto" 
+                  />
+                </div>
+                <div className="mt-4 bg-sky-50 p-4 rounded-lg">
+                  <h5 className="font-semibold text-sky-800 mb-2">Coupe du Trône 2023</h5>
+                  <p className="text-gray-700">
+                    Moataz proudly holding the prestigious Coupe du Trône trophy, one of Morocco's highest achievements in paragliding competitions.
+                  </p>
+                </div>
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </div>
