@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import NewBlogPostPage from "./pages/NewBlogPostPage";
+import TandemFlightPage from "./pages/TandemFlightPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:id" element={<BlogPostPage />} />
           <Route path="/blog/new" element={<NewBlogPostPage />} />
+          <Route path="/tandem-flight" element={<TandemFlightPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -2,19 +2,22 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const ServiceCard = ({ 
   title, 
   description, 
   price, 
   image, 
-  features 
+  features,
+  link
 }: { 
   title: string; 
   description: string; 
   price: string; 
   image: string; 
   features: string[];
+  link?: string;
 }) => {
   const scrollToBooking = () => {
     const element = document.getElementById('booking');
@@ -50,7 +53,13 @@ const ServiceCard = ({
         </ul>
       </CardContent>
       <CardFooter>
-        <Button onClick={scrollToBooking} className="w-full">Book Now</Button>
+        {link ? (
+          <Button asChild className="w-full">
+            <Link to={link}>En savoir plus</Link>
+          </Button>
+        ) : (
+          <Button onClick={scrollToBooking} className="w-full">Book Now</Button>
+        )}
       </CardFooter>
     </Card>
   );
@@ -68,7 +77,8 @@ const Services = () => {
         "Professional pilot handling the controls",
         "Basic maneuvers introduction",
         "Stunning panoramic views"
-      ]
+      ],
+      link: "/tandem-flight"
     },
     {
       title: "Adrenaline Flight",
