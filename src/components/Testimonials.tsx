@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import ReviewForm from './ReviewForm';
 
@@ -48,7 +48,7 @@ const TestimonialCard = ({
 };
 
 const Testimonials = () => {
-  const testimonials = [
+  const initialTestimonials = [
     {
       quote: "The experience was beyond words! Moataz made me feel safe the entire time while still giving me the thrill of a lifetime. Will definitely be back for another flight!",
       author: "Sarah T.",
@@ -75,6 +75,12 @@ const Testimonials = () => {
     }
   ];
 
+  const [testimonials, setTestimonials] = useState(initialTestimonials);
+
+  const addTestimonial = (newTestimonial) => {
+    setTestimonials([...testimonials, newTestimonial]);
+  };
+
   return (
     <section id="testimonials" className="section bg-white">
       <div className="container">
@@ -90,7 +96,7 @@ const Testimonials = () => {
         </div>
         
         <div className="mt-16 max-w-2xl mx-auto">
-          <ReviewForm />
+          <ReviewForm onAddTestimonial={addTestimonial} />
         </div>
       </div>
     </section>

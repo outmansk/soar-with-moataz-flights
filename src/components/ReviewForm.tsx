@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,7 +25,25 @@ const reviewSchema = z.object({
 
 type ReviewFormData = z.infer<typeof reviewSchema>;
 
-const ReviewForm = () => {
+// An array of default profile pictures to use for new reviews
+const defaultProfilePictures = [
+  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1470&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=1470&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1376&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=1399&auto=format&fit=crop"
+];
+
+interface ReviewFormProps {
+  onAddTestimonial: (testimonial: {
+    quote: string;
+    author: string;
+    location: string;
+    image: string;
+  }) => void;
+}
+
+const ReviewForm = ({ onAddTestimonial }: ReviewFormProps) => {
   const form = useForm<ReviewFormData>({
     resolver: zodResolver(reviewSchema),
     defaultValues: {
@@ -37,11 +55,22 @@ const ReviewForm = () => {
   });
 
   function onSubmit(data: ReviewFormData) {
-    // In a real application, we would send this data to a server
-    console.log("Review submitted:", data);
+    // Get a random profile picture from our array
+    const randomProfilePic = defaultProfilePictures[Math.floor(Math.random() * defaultProfilePictures.length)];
+    
+    // Create the testimonial object
+    const newTestimonial = {
+      quote: data.review,
+      author: data.name,
+      location: data.location,
+      image: randomProfilePic
+    };
+    
+    // Add the testimonial to the parent component
+    onAddTestimonial(newTestimonial);
     
     // Show success message
-    toast.success("Thank you for your review! It will be published after moderation.");
+    toast.success("Thank you for your review! Your testimonial has been added.");
     
     // Reset the form
     form.reset();
