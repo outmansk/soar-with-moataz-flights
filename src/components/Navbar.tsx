@@ -39,6 +39,10 @@ const Navbar = () => {
 
   const changeLanguage = (lang: LanguageCode) => {
     setLanguage(lang);
+    // Close mobile menu if it's open
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
   };
 
   return (
@@ -61,25 +65,26 @@ const Navbar = () => {
           </Link>
           <NavLink href="#contact" scrolled={scrolled}>{t('navbar.contact')}</NavLink>
           
-          {/* Language Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className={`rounded-full p-2 ${scrolled ? 'text-gray-700' : 'text-white'}`}>
-                <Globe className="h-5 w-5" />
+          {/* Language Selection - Desktop */}
+          <div className="flex items-center space-x-2">
+            {Object.entries(languages).map(([code, name]) => (
+              <Button
+                key={code}
+                variant={language === code ? "default" : "outline"}
+                size="sm"
+                onClick={() => changeLanguage(code as LanguageCode)}
+                className={`text-xs px-3 py-1 ${
+                  language === code 
+                    ? "bg-sky-dark hover:bg-sky text-white"
+                    : scrolled 
+                      ? "text-gray-700 hover:text-sky-dark" 
+                      : "text-white hover:bg-white/20"
+                }`}
+              >
+                {name}
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {Object.entries(languages).map(([code, name]) => (
-                <DropdownMenuItem 
-                  key={code}
-                  className={language === code ? "bg-sky-100 font-medium" : ""}
-                  onClick={() => changeLanguage(code as LanguageCode)}
-                >
-                  {name}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+            ))}
+          </div>
           
           <Button 
             variant="default" 
@@ -130,6 +135,22 @@ const Navbar = () => {
               {t('navbar.blog')}
             </Link>
             <MobileNavLink href="#contact" onClick={toggleMenu}>{t('navbar.contact')}</MobileNavLink>
+            
+            {/* Language Selection - Mobile */}
+            <div className="flex space-x-2 py-2">
+              {Object.entries(languages).map(([code, name]) => (
+                <Button
+                  key={code}
+                  variant={language === code ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => changeLanguage(code as LanguageCode)}
+                  className={`text-xs px-3 py-1 ${language === code ? "bg-sky-dark hover:bg-sky text-white" : ""}`}
+                >
+                  {name}
+                </Button>
+              ))}
+            </div>
+            
             <Button 
               variant="default" 
               asChild
